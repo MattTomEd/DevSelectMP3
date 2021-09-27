@@ -1,12 +1,8 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMAO</title>
-</head>
-<body>
+{% extends "base.html" %}   
+{% block content %} 
 
+    <h2>DEVELOPER TITLE</h2>
+    
     {% for developer in developers %}
         {{ developer.first_name }}<br>
         {{ developer.last_name }}<br>
@@ -15,5 +11,4 @@
         {{ developer.contact_portfolio }}<br>
     {% endfor %}
     
-</body>
-</html>
+{% endblock %}
