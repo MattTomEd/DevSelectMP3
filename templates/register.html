@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Register</h3>
+
+<div class="row">
+    <form class="col s8 offset-s2" method="POST" action="{{ url_for('register') }}">
+        <div class="row">
+            <i class="fas fa-user-plus prefix"></i>
+            <div class="input-field">
+                <input id="username" name="username" type="text" class="validate">
+                <label for="username">Enter a username...</label>
+            </div>
+        </div>
+        <div class="row">
+            <i class="fa-solid fa-at prefix"></i>
+            <div class="input-field">
+                <input id="email" name="email" type="email" class="validate">
+                <label for="email">Enter an email...</label>
+                <span class="helper-text" data-error="This is not a valid email"
+                    data-success="This is a valid email!"></span>
+            </div>
+        </div>
+        <div class="row">
+            <i class="fa-solid fa-key prefix"></i>
+            <div class="input-field">
+                <input id="password" name="password" type="password" class="password">
+                <label for="password">Enter a password...</label>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="col s6 btn-large darken-4 text-shadow">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

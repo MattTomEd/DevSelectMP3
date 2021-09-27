@@ -1,3 +1,12 @@
-$(document).ready(function(){
-    $('.sidenav').sidenav({edge: "right"});
-  });
+$(document).ready(function () {
+    $('.sidenav').sidenav({
+        edge: "right"
+    });
+});
+
+$('.chips').chips();
+
+$('.chips-placeholder').chips({
+    placeholder: 'Enter a skill...',
+    secondaryPlaceholder: 'Add another skill...',
+});
