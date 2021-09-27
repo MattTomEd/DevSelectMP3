@@ -16,6 +16,49 @@
 </head>
 
 <body>
+
+    <header>
+        <nav class="nav-extended green darken-4">
+            <div class="nav-wrapper">
+                <a href="{{ url_for('get_devs') }}" class="brand-logo">Dev Select</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('get_devs') }}">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Add A Dev</a></li>
+                    <li><a href="#">Edit Entry</a></li>
+                    <li><a href="#">Log Out</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a href="#test1">Test 1</a></li>
+                    <li class="tab"><a class="active" href="#test2">Test 2</a></li>
+                    <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
+                    <li class="tab"><a href="#test4">Test 4</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><h4 class="center-align text-darken-4">Dev Select</h4></li>
+            <li><a href="{{ url_for('get_devs') }}">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Add A Dev</a></li>
+            <li><a href="#">Edit Entry</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Register</a></li>
+        </ul>
+
+        <div id="test1" class="col s12">Test 1</div>
+        <div id="test2" class="col s12">Test 2</div>
+        <div id="test3" class="col s12">Test 3</div>
+        <div id="test4" class="col s12">Test 4</div>
+
+    </header>
     <h1>BASE TEMPLATE TITLE</h1>
     {% block content %}
     {% endblock %}
