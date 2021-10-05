@@ -59,7 +59,7 @@
                 <span class="card-title"> {{ skill.skill_name }}</span>
             </div>
             <div class="card-action">
-                <a href="#">Edit</a>
+                <a href="{{ url_for('edit_skill', skill_id=skill._id) }}">Edit</a>
                 <a href="#">Delete</a>
             </div>
         </div>

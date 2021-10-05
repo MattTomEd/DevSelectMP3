@@ -151,7 +151,7 @@ def get_skills():
     return render_template("skills.html", skills = skills)
 
 
-@app.route("/add-skill", methods=["GET", "POST"])
+@app.route("/add_skill", methods=["GET", "POST"])
 def add_skill():
     if request.method == "POST":
         skill = {
@@ -161,6 +161,19 @@ def add_skill():
         flash("New skill added!")
         return redirect(url_for("get_skills"))
     return render_template("add_skill.html")
+
+
+@app.route("/edit_skill/<skill_id>", methods=["GET", "POST"])
+def edit_skill(skill_id):
+    if request.method == "POST":
+        submit = {
+            "skill_name": request.form.get("skill_name")
+        }
+        mongo.db.skills.update({"_id": ObjectId(skill_id)}, submit)
+        flash("Skill updated successfully")
+        return redirect(url_for("get_skills"))
+    skill = mongo.db.skills.find_one({"_id": ObjectId(skill_id)})
+    return render_template("edit_skill.html", skill=skill)
 
 
 @app.route("/admin")
