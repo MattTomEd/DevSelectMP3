@@ -114,8 +114,6 @@ def logout():
 def add_dev():
     if request.method == "POST":
 
-        import pdb; pdb.set_trace()
-
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
 
         dev_image = None
