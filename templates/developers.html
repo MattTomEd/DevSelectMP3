@@ -3,27 +3,19 @@
 
     <h2>DEVELOPER TITLE</h2>
     
-    {% for developer in developers %}
-        {{ developer.first_name }}<br>
-        {{ developer.last_name }}<br>
-        {{ developer.looking_for_work }}<br>
-        {{ developer.contact_email }}<br>
-        {{ developer.contact_portfolio }}<br>
-    {% endfor %}
-    
     <ul class="collapsible">
+        {% for developer in developers %}
         <li>
-            <div class="collapsible-header"><i class="fas fa-caret-down">filter_drama</i>First</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-header"><i class="fas fa-caret-down"></i>
+                {{ developer.first_name }} {{ developer.last_name }} 
+            </div>
+            <div class="collapsible-body">
+                {{ developer.looking_for_work }}
+                {{ developer.contact_portfolio }}
+                {{ developer.contact_email }}
+            </div>
         </li>
-        <li>
-            <div class="collapsible-header"><i class="fas fa-caret-down">place</i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="fas fa-caret-down">whatshot</i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
     </ul>
 
 {% endblock %}

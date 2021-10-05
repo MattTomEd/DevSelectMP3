@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_devs")
 def get_devs():
-    developers = mongo.db.developers.find()
+    developers = list(mongo.db.developers.find())
     return render_template("developers.html", developers=developers)
 
 
