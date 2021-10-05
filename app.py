@@ -176,6 +176,13 @@ def edit_skill(skill_id):
     return render_template("edit_skill.html", skill=skill)
 
 
+@app.route("/delete_skill/<skill_id>")
+def delete_skill(skill_id):
+    mongo.db.skills.remove({"_id": ObjectId(skill_id)})
+    flash("Skill successfully deleted!")
+    return redirect(url_for("get_skills"))
+
+
 @app.route("/admin")
 def admin():
     skills = list(mongo.db.skills.find().sort("skill_name", 1))
