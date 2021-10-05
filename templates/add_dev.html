@@ -4,15 +4,15 @@
 <h3>Add Developer</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('add_dev') }}">
+    <form class="col s12" method="POST" action="{{ url_for('add_dev') }}" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-user-circle"></i>
                 <h3>Choose skills</h3>
                 {% for skill in skills %}
                 <p>
                     <label id="{{ skill.skill_name }}">
-                        <input id="{{ skill.skill_name }}" value="{{ skill.skill_name }}"name="skills" type="checkbox" />
+                        <input id="{{ skill.skill_name }}" value="{{ skill.skill_name }}" name="skills"
+                            type="checkbox" />
                         <span>{{ skill.skill_name }}</span>
                     </label>
                 </p>
@@ -20,48 +20,63 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="col s1">
                 <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="input-field col s11">
                 <input id="first_name" name="first_name" type="text" maxlength="20" class="validate" required>
                 <label for="first_name">First Name</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="col s1">
                 <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="input-field col s11">
                 <input id="last_name" name="last_name" type="text" maxlength="20" class="validate" required>
                 <label for="last_name">Last Name</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-user-circle"></i>
+            <div class="col s1">
+                <i class="fas fa-envelope-square"></i>
+            </div>
+            <div class="input-field col s11">
                 <input id="contact_email" name="contact_email" type="email" maxlength="40" class="validate" required>
                 <label for="contact_email">Enter your email</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-user-circle"></i>
-                <input id="contact_portfolio" name="contact_portfolio" type="text" maxlength="40" class="validate" required>
+            <div class="col s1">
+                <i class="fas fa-website"></i>
+            </div>
+            <div class="input-field col s11">
+                <input id="contact_portfolio" name="contact_portfolio" type="text" maxlength="40" class="validate"
+                    required>
                 <label for="contact_portfolio">Enter your portfolio website</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="col s1">
+                <i class="fas fa-image"></i>
+            </div>
+            <div class="input-field col s11">
                 <div class="file-field input-field">
                     <div class="btn grey lighten-2">
                         <span>File</span>
                         <input type="file" id="dev_image" name="dev_image" accept="image/png, image/jpeg" />
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text"/>
+                        <input class="file-path validate" type="text" />
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="col s1">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="input-field col s11">
                 <!-- Switch -->
                 <div class="switch">
                     <i class="fas fa-user-circle"></i>
@@ -79,7 +94,7 @@
             <div class="col s12 center-align">
                 <button class="btn waves-effect waves-light" type="submit">Add Developer
                     <i class="material-icons right"></i>
-                  </button>
+                </button>
             </div>
         </div>
     </form>

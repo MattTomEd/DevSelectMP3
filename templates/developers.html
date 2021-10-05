@@ -21,7 +21,7 @@
     </form>
 </div>
 
-{% if developers|length > 0%}
+{% if developers|length > 0 %}
 
 <ul class="collapsible">
     {% for developer in developers %}
@@ -33,7 +33,7 @@
             {{ developer.contact_portfolio }}
             <br>
             This developer's skills are as follows: {% for skill in developer.skills %}
-            {{ skill }}
+            <div class="chip">{{ skill }}</div>
             {% endfor %}
             <br>
             {{ developer.contact_email }}

@@ -9,3 +9,11 @@ body {
 .card {
     background-color:rgb(13, 61, 13)
 }
+
+.chip {
+    background-color:rgb(144, 201, 144)
+}
+
+html i {
+    font-size: 3vh;
+}

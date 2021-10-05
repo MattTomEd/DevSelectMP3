@@ -70,6 +70,7 @@ def login():
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
+                    session["is_admin"] = True if existing_user['is_admin'] == "True" else False
                     flash("Welcome, {}".format(request.form.get("username")))
                     return redirect(url_for(
                         "profile", username=session["user"]))
@@ -103,6 +104,7 @@ def profile(username):
 @app.route("/logout")
 def logout():
     # remove user from session cookie
+    session["is_admin"] = False
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
@@ -111,19 +113,23 @@ def logout():
 @app.route("/add_dev", methods=["GET", "POST"])
 def add_dev():
     if request.method == "POST":
-        
+
+        import pdb; pdb.set_trace()
+
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
 
+        dev_image = None
+        result = None
         if "dev_image" in request.files:
             dev_image = request.files['dev_image']
             if dev_image.filename != '':
                 dev_image.filename = str(uuid.uuid4())
-            mongo.save_file(dev_image.filename, dev_image)
+            result = mongo.save_file(dev_image.filename, dev_image)
 
         dev = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
-            "dev_image": dev_image.filename,
+            "dev_image": dev_image.filename if dev_image is not None else "",
             "looking_for_work": looking_for_work,
             "skills": request.form.getlist("skills"),
             "created_by": session["user"],
@@ -198,6 +204,7 @@ def edit_skill(skill_id):
         return redirect(url_for("get_skills"))
     skill = mongo.db.skills.find_one({"_id": ObjectId(skill_id)})
     return render_template("edit_skill.html", skill=skill)
+
 
 
 @app.route("/delete_skill/<skill_id>")

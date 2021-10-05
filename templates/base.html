@@ -23,7 +23,9 @@
                 <a href="{{ url_for('get_devs') }}" class="brand-logo">GameDev.Select</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% if session["is_admin"] == True %}
                     <li><a href="{{ url_for('admin') }}">ADMIN</a></li>
+                {% endif %}
                     <li><a href="{{ url_for('get_devs') }}">Home</a></li>
                 {% if session.user %}
                     <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>
@@ -42,7 +44,9 @@
             <li>
                 <h4 class="center-align text-darken-4">Dev Select</h4>
             </li>
+            {% if session["is_admin"] == "True" %}
             <li><a href="{{ url_for('admin') }}">ADMIN</a></li>
+            {% endif %}
             <li><a href="{{ url_for('get_devs') }}">Home</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>

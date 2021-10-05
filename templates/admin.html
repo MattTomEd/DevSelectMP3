@@ -8,14 +8,10 @@
 <ul class="collapsible">
     {% for user in users %}
     <li>
-        <div class="collapsible-header"><i class="fas fa-caret-down"></i>
+        <div class="collapsible-header">
             Username: {{ user.username }}
             <br>
             Email: {{ user.email }}
-        </div>
-        <div class="collapsible-body">
-            <a href="#">Edit</a>
-            <a href="#">Delete</a>
         </div>
     </li>
     {% endfor %}
@@ -30,12 +26,21 @@
             {{ developer.first_name }} {{ developer.last_name }}
         </div>
         <div class="collapsible-body">
-            {{ developer.looking_for_work }}
             {{ developer.contact_portfolio }}
-            {% for skill in developer.skills %}
-            {{ skill }}
+            <br>
+            This developer's skills are as follows: {% for skill in developer.skills %}
+            <div class="chip">{{ skill }}</div>
             {% endfor %}
+            <br>
             {{ developer.contact_email }}
+            {% if developer.looking_for_work|lower == "on" %}
+            <br>
+            <p class="green-text text-darken-4">This person is currently looking for work!</strong>
+            {% else %}
+            <br>
+            <p class="red-text text-darken-4">This person is not looking for work.</strong>
+            {% endif %}
+            <br>
             <p><strong>Added by {{ developer.created_by }}</strong></p>
         </div>
     </li>
@@ -59,8 +64,8 @@
                 <span class="card-title"> {{ skill.skill_name }}</span>
             </div>
             <div class="card-action">
-                <a href="{{ url_for('edit_skill', skill_id=skill._id) }}">Edit</a>
-                <a href="{{ url_for('delete_skill', skill_id=skill._id) }}">Delete</a>
+                <a class="blue-text text-darken-3" href="{{ url_for('edit_skill', skill_id=skill._id) }}">Edit</a>
+                <a class="red-text text-darken-3" href="{{ url_for('delete_skill', skill_id=skill._id) }}">Delete</a>
             </div>
         </div>
     </div>
