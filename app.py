@@ -100,7 +100,8 @@ def logout():
 
 @app.route("/add_dev")
 def add_dev():
-    return render_template("add_dev.html")
+    skills = mongo.db.skills.find().sort("skill_name", 1)
+    return render_template("add_dev.html", skills=skills)
 
 
 if __name__ == "__main__":

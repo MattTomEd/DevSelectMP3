@@ -8,6 +8,20 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-user-circle"></i>
+                <h3>Choose skills</h3>
+                {% for skill in skills %}
+                <p>
+                    <label id="{{ skill.skill_name }}">
+                        <input id="{{ skill.skill_name }}" name="{{ skill.skill_name }}" type="checkbox" />
+                        <span>{{ skill.skill_name }}</span>
+                    </label>
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
                 <input id="first_name" name="first_name" type="text" maxlength="20" class="validate" required>
                 <label for="first_name">First Name</label>
             </div>
