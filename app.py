@@ -98,8 +98,23 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_dev")
+@app.route("/add_dev", methods=["GET", "POST"])
 def add_dev():
+    if request.method == "POST":
+        looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+        skills = request.form.getlist("skills")
+        skills_list = skills.tostring()
+        dev = {
+            "first_name": request.form.get("first_name"),
+            "last_name": request.form.get("last_name"),
+            "looking_for_work": looking_for_work,
+            "skills": skills_list,
+            "created_by": session["user"]
+        }
+        mongo.db.developers.insert_one(dev)
+        flash("Developer successfully added!")
+        return redirect(url_for("get_devs"))
+
     skills = mongo.db.skills.find().sort("skill_name", 1)
     return render_template("add_dev.html", skills=skills)
 
