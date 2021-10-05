@@ -145,6 +145,12 @@ def delete_dev(dev_id):
     return redirect(url_for("get_devs"))
 
 
+@app.route("/get_skills")
+def get_skills():
+    skills = list(mongo.db.skills.find().sort("skill_name", 1))
+    return render_template("skills.html", skills = skills)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

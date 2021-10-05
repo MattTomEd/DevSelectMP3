@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Manage Skills</h2>
+
+<div class="row">
+    {% for skill in skills %}
+    <div class="col s12 m3">
+        <div class="card light-green darken-1 center-align">
+            <div class="card-content white-text">
+                <span class="card-title"> {{ skill.skill_name }}</span>
+            </div>
+            <div class="card-action">
+                <a href="#">Developers</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

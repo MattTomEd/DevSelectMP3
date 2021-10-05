@@ -27,7 +27,7 @@
                 {% if session.user %}
                     <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>
                     <li><a href="{{ url_for('add_dev') }}">Add A Dev</a></li>
-                    <li><a href="#">Edit Entry</a></li>
+                    <li><a href="{{ url_for('get_skills') }}">Developer Skills</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -45,7 +45,7 @@
             {% if session.user %}
                 <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>
                 <li><a href="{{ url_for('add_dev') }}">Add A Dev</a></li>
-                <li><a href="#">Edit Entry</a></li>
+                <li><a href="{{ url_for('get_skills') }}">Developer Skills</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">Log In</a></li>
