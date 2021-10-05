@@ -18,7 +18,7 @@
             <div class="col s3">
                 <i class="fas fa-caret-down"></i>
                 <a href="" class="btn-small align-right">Done</a>
-                <a href="" class="btn-small align-right">Edit</a>
+                <a href="{{ url_for('edit_dev', dev_id=userdev._id)}}" class="btn-small align-right">Edit</a>
             </div>
             {{ userdev.first_name }} {{ userdev.last_name }}
         </div>

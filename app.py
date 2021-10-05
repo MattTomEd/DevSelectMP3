@@ -118,6 +118,14 @@ def add_dev():
     return render_template("add_dev.html", skills=skills)
 
 
+@app.route("/edit_dev/<dev_id>", methods=["GET", "POST"])
+def edit_dev(dev_id):
+    dev = mongo.db.developers.find_one({"_id": ObjectId(dev_id)})
+
+    skills = mongo.db.skills.find().sort("skill_name", 1)
+    return render_template("edit_dev.html", dev=dev, skills=skills)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

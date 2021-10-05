@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Edit Developer</h3>
+
+<div class="row">
+    <form class="col s12" method="POST" action="{{ url_for('edit_dev', dev_id=dev._id) }}">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <h3>Choose skills</h3>
+                {% for skill in skills %}
+                <p>
+                    <label id="{{ skill.skill_name }}">
+                        <input id="{{ skill.skill_name }}" value="{{ skill.skill_name }}"name="skills" type="checkbox" />
+                        <span>{{ skill.skill_name }}</span>
+                    </label>
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="first_name" name="first_name" type="text" maxlength="20" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="last_name" name="last_name" type="text" maxlength="20" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <!-- Switch -->
+                <div class="switch">
+                    <i class="fas fa-user-circle"></i>
+                    <p>Are you looking for work?</p>
+                    <label for="looking_for_work">
+                        No
+                        <input type="checkbox" id="looking_for_work" name="looking_for_work">
+                        <span class="lever"></span>
+                        Yes
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <button class="btn waves-effect waves-light" type="submit">Edit Developer
+                    <i class="material-icons right"></i>
+                  </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
