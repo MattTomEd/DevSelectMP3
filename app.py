@@ -83,9 +83,10 @@ def profile(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    userdevs = list(mongo.db.developers.find({"created_by": username}))
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", username=username, userdevs=userdevs)
 
     return redirect(url_for("login"))
 
@@ -102,13 +103,11 @@ def logout():
 def add_dev():
     if request.method == "POST":
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
-        skills = request.form.getlist("skills")
-        skills_list = skills.tostring()
         dev = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
             "looking_for_work": looking_for_work,
-            "skills": skills_list,
+            "skills": request.form.getlist("skills"),
             "created_by": session["user"]
         }
         mongo.db.developers.insert_one(dev)
