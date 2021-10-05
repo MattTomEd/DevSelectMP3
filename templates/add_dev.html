@@ -5,20 +5,37 @@
 
 <div class="row">
     <form class="col s12" method="POST" action="">
-      <div class="row">
-        <div class="input-field col s12">
-          <i class="fas fa-user-circle">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label for="icon_prefix">First Name</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="first_name" name="first_name" type="text" maxlength="20" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
         </div>
-        <div class="input-field col s12">
-          <i class="fas fa-phone">phone</i>
-          <input id="icon_telephone" type="tel" class="validate">
-          <label for="icon_telephone">Telephone</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="last_name" name="last_name" type="text" maxlength="20" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <!-- Switch -->
+                <div class="switch">
+                    <i class="fas fa-user-circle"></i>
+                    <p>Are you looking for work?</p>
+                    <label for="looking_for_work">
+                        No
+                        <input type="checkbox" id="looking_for_work" name="looking_for_work">
+                        <span class="lever"></span>
+                        Yes
+                    </label>
+                </div>
+            </div>
+        </div>
     </form>
-  </div>
-        
+</div>
+
 
 {% endblock %}
