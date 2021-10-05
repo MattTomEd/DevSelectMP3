@@ -151,6 +151,16 @@ def get_skills():
     return render_template("skills.html", skills = skills)
 
 
+@app.route("/admin")
+def admin():
+    skills = list(mongo.db.skills.find().sort("skill_name", 1))
+    users = list(mongo.db.users.find())
+    developers = list(mongo.db.developers.find())
+    return render_template(
+        "admin.html", skills = skills, developers = developers, users = users
+        )
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
