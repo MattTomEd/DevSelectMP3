@@ -25,6 +25,13 @@ def get_devs():
     return render_template("developers.html", developers=developers)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    developers = list(mongo.db.developers.find({"$text": {"$search": query}}))
+    return render_template("developers.html", developers=developers)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":

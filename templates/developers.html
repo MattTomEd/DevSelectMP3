@@ -1,25 +1,48 @@
-{% extends "base.html" %}   
-{% block content %} 
+{% extends "base.html" %}
+{% block content %}
 
-    <h2>DEVELOPER TITLE</h2>
-    
-    <ul class="collapsible">
-        {% for developer in developers %}
-        <li>
-            <div class="collapsible-header"><i class="fas fa-caret-down"></i>
-                {{ developer.first_name }} {{ developer.last_name }} 
+<h2>Developer List</h2>
+
+<div class="row card-panel grey lighten-5">
+    <form action="{{ url_for('search') }}" method="post" class="col s12">
+        <div class="row valign-wrapper center-align">
+            <div class="input-field col s12 m8">
+                <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
+                <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                <label for="query">Search Developers</label>
             </div>
-            <div class="collapsible-body">
-                {{ developer.looking_for_work }}
-                {{ developer.contact_portfolio }}
-                {% for skill in developer.skills %}
-                    {{ skill }}
-                {% endfor %}
-                {{ developer.contact_email }}
-                <p><strong>Added by {{ developer.created_by }}</strong></p>
+            <div class="col s12 m4">
+                <a href="{{ url_for('get_devs') }}" class="red btn text-shadow">Reset</a>
+                <button type="submit" class="light-blue darken-1 btn text-shadow">
+                    <i class="fas fa-search left"></i> Search
+                </button>
             </div>
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+    </form>
+</div>
+
+{% if developers|length > 0%}
+
+<ul class="collapsible">
+    {% for developer in developers %}
+    <li>
+        <div class="collapsible-header"><i class="fas fa-caret-down"></i>
+            {{ developer.first_name }} {{ developer.last_name }}
+        </div>
+        <div class="collapsible-body">
+            {{ developer.looking_for_work }}
+            {{ developer.contact_portfolio }}
+            {% for skill in developer.skills %}
+            {{ skill }}
+            {% endfor %}
+            {{ developer.contact_email }}
+            <p><strong>Added by {{ developer.created_by }}</strong></p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h3>No developers found!</h3>
+{% endif %}
 
 {% endblock %}
