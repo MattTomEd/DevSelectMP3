@@ -24,7 +24,7 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_devs') }}">Home</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>
                     <li><a href="#">Add A Dev</a></li>
                     <li><a href="#">Edit Entry</a></li>
                     <li><a href="#">Log Out</a></li>
@@ -39,7 +39,7 @@
                 <h4 class="center-align text-darken-4">Dev Select</h4>
             </li>
             <li><a href="{{ url_for('get_devs') }}">Home</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="{{ url_for('login', username=session['user']) }}">Profile</a></li>
             <li><a href="#">Add A Dev</a></li>
             <li><a href="#">Edit Entry</a></li>
             <li><a href="#">Log Out</a></li>
