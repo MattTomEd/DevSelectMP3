@@ -151,6 +151,18 @@ def get_skills():
     return render_template("skills.html", skills = skills)
 
 
+@app.route("/add-skill", methods=["GET", "POST"])
+def add_skill():
+    if request.method == "POST":
+        skill = {
+            "skill_name": request.form.get("skill_name")
+        }
+        mongo.db.skills.insert_one(skill)
+        flash("New skill added!")
+        return redirect(url_for("get_skills"))
+    return render_template("add_skill.html")
+
+
 @app.route("/admin")
 def admin():
     skills = list(mongo.db.skills.find().sort("skill_name", 1))
