@@ -6,12 +6,12 @@
 <div class="row">
     {% for skill in skills %}
     <div class="col s12 m3">
-        <div class="card light-green darken-1 center-align">
+        <div class="card dark-green darken-1 center-align">
             <div class="card-content white-text">
                 <span class="card-title"> {{ skill.skill_name }}</span>
             </div>
             <div class="card-action">
-                <a href="#">Search for people</a>
+                <a href="{{ url_for('add_skill') }}">Search for people</a>
             </div>
         </div>
     </div>

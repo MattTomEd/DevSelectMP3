@@ -5,3 +5,7 @@ body {
 .flashes h4 {
     line-height: 2;
 }
+
+.card {
+    background-color:rgb(13, 61, 13)
+}

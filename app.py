@@ -1,4 +1,5 @@
 import os
+import uuid
 from flask import (
     Flask, flash, render_template, 
     redirect, request, session, url_for)
@@ -110,20 +111,36 @@ def logout():
 @app.route("/add_dev", methods=["GET", "POST"])
 def add_dev():
     if request.method == "POST":
+        
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+
+        if "dev_image" in request.files:
+            dev_image = request.files['dev_image']
+            if dev_image.filename != '':
+                dev_image.filename = str(uuid.uuid4())
+            mongo.save_file(dev_image.filename, dev_image)
+
         dev = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
+            "dev_image": dev_image.filename,
             "looking_for_work": looking_for_work,
             "skills": request.form.getlist("skills"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "img_id": result
         }
+
         mongo.db.developers.insert_one(dev)
         flash("Developer successfully added!")
         return redirect(url_for("get_devs"))
 
     skills = mongo.db.skills.find().sort("skill_name", 1)
     return render_template("add_dev.html", skills=skills)
+
+
+@app.route('/img_uploads/<filename>')
+def img_uploads(filename):
+    return mongo.send_file(filename)
 
 
 @app.route("/edit_dev/<dev_id>", methods=["GET", "POST"])
