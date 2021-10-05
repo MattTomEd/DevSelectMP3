@@ -6,20 +6,6 @@
 <div class="row">
     <form class="col s12" method="POST" action="{{ url_for('add_dev') }}" enctype="multipart/form-data">
         <div class="row">
-            <div class="input-field col s12">
-                <h3>Choose skills</h3>
-                {% for skill in skills %}
-                <p>
-                    <label id="{{ skill.skill_name }}">
-                        <input id="{{ skill.skill_name }}" value="{{ skill.skill_name }}" name="skills"
-                            type="checkbox" />
-                        <span>{{ skill.skill_name }}</span>
-                    </label>
-                </p>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="row">
             <div class="col s1">
                 <i class="fas fa-user-circle"></i>
             </div>
@@ -62,8 +48,8 @@
             </div>
             <div class="input-field col s11">
                 <div class="file-field input-field">
-                    <div class="btn grey lighten-2">
-                        <span>File</span>
+                    <div class="btn green darken-3">
+                        <span>Add an image</span>
                         <input type="file" id="dev_image" name="dev_image" accept="image/png, image/jpeg" />
                     </div>
                     <div class="file-path-wrapper">
@@ -73,13 +59,30 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s1">
+            <div class="input-field col s4">
+                <h3>Choose skills</h3>
+                {% for skill in skills %}
+                <p>
+                    <label id="{{ skill.skill_name }}">
+                        <input id="{{ skill.skill_name }}" value="{{ skill.skill_name }}" name="skills"
+                            type="checkbox" />
+                        <span>{{ skill.skill_name }}</span>
+                    </label>
+                </p>
+                {% endfor %}
+            </div>
+            <div class="input-field col s8">
+                <textarea id="description" name="description" class="materialize-textarea"></textarea>
+                <label for="description">Enter a summary of your recent work</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
                 <i class="fas fa-briefcase"></i>
             </div>
-            <div class="input-field col s11">
+            <div class="input-field col s12 center-align">
                 <!-- Switch -->
                 <div class="switch">
-                    <i class="fas fa-user-circle"></i>
                     <p>Are you looking for work?</p>
                     <label for="looking_for_work">
                         No

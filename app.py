@@ -129,6 +129,7 @@ def add_dev():
         dev = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
+            "description": request.form.get("description"),
             "dev_image": dev_image.filename if dev_image is not None else "",
             "looking_for_work": looking_for_work,
             "skills": request.form.getlist("skills"),
@@ -157,6 +158,7 @@ def edit_dev(dev_id):
         devsubmit = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
+            "description": request.form.get("description"),
             "looking_for_work": looking_for_work,
             "skills": request.form.getlist("skills"),
             "created_by": session["user"]

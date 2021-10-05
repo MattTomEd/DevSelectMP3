@@ -32,6 +32,7 @@
         <div class="collapsible-body">
             {{ developer.contact_portfolio }}
             <br>
+            {{ developer.description }}
             This developer's skills are as follows: {% for skill in developer.skills %}
             <div class="chip">{{ skill }}</div>
             {% endfor %}
