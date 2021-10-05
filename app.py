@@ -86,7 +86,8 @@ def profile(username):
     userdevs = list(mongo.db.developers.find({"created_by": username}))
 
     if session["user"]:
-        return render_template("profile.html", username=username, userdevs=userdevs)
+        return render_template(
+            "profile.html", username=username, userdevs=userdevs)
 
     return redirect(url_for("login"))
 
@@ -120,8 +121,20 @@ def add_dev():
 
 @app.route("/edit_dev/<dev_id>", methods=["GET", "POST"])
 def edit_dev(dev_id):
-    dev = mongo.db.developers.find_one({"_id": ObjectId(dev_id)})
+    
+    if request.method == "POST":
+        looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+        devsubmit = {
+            "first_name": request.form.get("first_name"),
+            "last_name": request.form.get("last_name"),
+            "looking_for_work": looking_for_work,
+            "skills": request.form.getlist("skills"),
+            "created_by": session["user"]
+        }
+        mongo.db.developers.update({"_id": ObjectId(dev_id)}, devsubmit)
+        flash("Developer successfully updated!")
 
+    dev = mongo.db.developers.find_one({"_id": ObjectId(dev_id)})
     skills = mongo.db.skills.find().sort("skill_name", 1)
     return render_template("edit_dev.html", dev=dev, skills=skills)
 
