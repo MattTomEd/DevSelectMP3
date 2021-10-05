@@ -138,6 +138,12 @@ def edit_dev(dev_id):
     skills = mongo.db.skills.find().sort("skill_name", 1)
     return render_template("edit_dev.html", dev=dev, skills=skills)
 
+@app.route("/delete_dev/<dev_id>")
+def delete_dev(dev_id):
+    mongo.db.developers.remove({"_id": ObjectId(dev_id)})
+    flash("Developer successfully deleted!")
+    return redirect(url_for("get_devs"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
