@@ -82,4 +82,32 @@
 <h3>No developers found!</h3>
 {% endif %}
 
+<h3>Skills Panel</h3>
+
+<div class="row">
+    <div class="col s12 center-align">
+        <a href="{{ url_for('add_skill') }}" class="btn-large">
+            Add Skill
+        </a>
+    </div>
+</div>
+<div class="row">
+    {% for skill in skills %}
+    <div class="col s12 m3">
+        <div class="card green darken-4 center-align">
+            <div class="card-content white-text">
+                <span class="card-title"> {{ skill.skill_name }}</span>
+            </div>
+            <div class="card-action no-margin">
+                <a class="blue-text text-lighten-3 center-align no-margin"
+                    href="{{ url_for('edit_skill', skill_id=skill._id) }}">Edit</a>
+                <a class="red-text text-lighten-3 center-align no-margin"
+                    href="{{ url_for('delete_skill', skill_id=skill._id) }}">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% endblock %}
