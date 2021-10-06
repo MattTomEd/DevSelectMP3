@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: rgb(197, 255, 197);
 }
 
 .flashes h4 {
@@ -14,12 +14,28 @@ body {
     margin: 0 0;
 }
 
+.logo-img {
+    max-width: 225px;
+}
+
+.home-img {
+    max-width: 30%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.developer-img {
+    max-width: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 .card {
     background-color:rgb(13, 61, 13)
 }
 
 .chip {
-    background-color:rgb(144, 201, 144)
+    background-color:rgb(255, 255, 255)
 }
 
 html i {

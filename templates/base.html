@@ -20,7 +20,7 @@
     <header>
         <nav class="nav-extended green darken-4">
             <div class="nav-wrapper">
-                <a href="{{ url_for('home') }}" class="brand-logo">GameDev.Select</a>
+                <a href="{{ url_for('home') }}" class="brand-logo"><img class="logo-img" src="{{url_for('static', filename='images/gamedevselectlogo.png')}}" alt="Logo Image"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if session["is_admin"] == True %}

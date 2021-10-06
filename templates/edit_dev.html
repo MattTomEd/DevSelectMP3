@@ -4,10 +4,62 @@
 <h3>Edit Developer</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('edit_dev', dev_id=dev._id) }}">
+    <form class="col s12" method="POST" action="{{ url_for('edit_dev', dev_id=dev._id) }}" enctype="multipart/form-data">
         <div class="row">
-            <div class="input-field col s12">
+            <div class="col s1">
                 <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="input-field col s11">
+                <input id="first_name" name="first_name" type="text" maxlength="20" value="{{ dev.first_name }}" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="input-field col s11">
+                <input id="last_name" name="last_name" type="text" maxlength="20" value="{{ dev.last_name }}" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1">
+                <i class="fas fa-envelope-square"></i>
+            </div>
+            <div class="input-field col s11">
+                <input id="contact_email" name="contact_email" type="email" maxlength="40" value="{{ dev.email }}" class="validate" required>
+                <label for="contact_email">Enter your email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1">
+                <i class="fas fa-website"></i>
+            </div>
+            <div class="input-field col s11">
+                <input id="contact_portfolio" name="contact_portfolio" type="text" maxlength="40" value="{{ dev.contact_portfolio }}" class="validate"
+                    required>
+                <label for="contact_portfolio">Enter your portfolio website</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s1">
+                <i class="fas fa-image"></i>
+            </div>
+            <div class="input-field col s11">
+                <div class="file-field input-field">
+                    <div class="btn green darken-3">
+                        <span>Add an image</span>
+                        <input type="file" id="dev_image" name="dev_image" accept="image/png, image/jpeg" />
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
                 <h3>Choose skills</h3>
                 {% for skill in skills %}
                 {% if skill.skill_name in dev.skills %}
@@ -29,37 +81,22 @@
                 {% endif %}
                 {% endfor %}
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-user-circle"></i>
-                <input id="first_name" name="first_name" type="text" maxlength="20" value="{{ dev.first_name }}"
-                    class="validate" required>
-                <label for="first_name">First Name</label>
+            <div class="input-field col s8">
+                <textarea id="description" name="description" class="materialize-textarea">{{- dev.description -}}</textarea>
+                <label for="description">Enter a summary of your recent work</label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <i class="fas fa-user-circle"></i>
-                <input id="last_name" name="last_name" type="text" maxlength="20" value="{{ dev.last_name }}"
-                    class="validate" required>
-                <label for="last_name">Last Name</label>
+            <div class="col s12 center-align">
+                <i class="fas fa-briefcase"></i>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 center-align">
                 <!-- Switch -->
                 <div class="switch">
-                    <i class="fas fa-user-circle"></i>
                     <p>Are you looking for work?</p>
                     <label for="looking_for_work">
-                        {% if dev.looking_for_work == "on" %}
-                        No
-                        <input type="checkbox" id="looking_for_work" name="looking_for_work" checked>
-                        {% else %}
                         No
                         <input type="checkbox" id="looking_for_work" name="looking_for_work">
-                        {% endif %}
                         <span class="lever"></span>
                         Yes
                     </label>
@@ -69,7 +106,7 @@
         <div class="row">
             <div class="col s12 center-align">
                 <a href="{{ url_for('get_devs') }}" class="btn red waves-effect waves-light">Cancel
-                        <i class="material-icons right"></i>
+                    <i class="material-icons right"></i>
                 </a>
                 <button class="btn waves-effect waves-light" type="submit">Edit Developer
                     <i class="material-icons right"></i>

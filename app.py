@@ -124,6 +124,11 @@ def logout():
 
 @app.route("/add_dev", methods=["GET", "POST"])
 def add_dev():
+    
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
+    
     if request.method == "POST":
 
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
@@ -163,9 +168,16 @@ def img_uploads(filename):
 
 @app.route("/edit_dev/<dev_id>", methods=["GET", "POST"])
 def edit_dev(dev_id):
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
     
     if request.method == "POST":
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+
+        dev_image = None
+        result = None
 
         if "dev_image" in request.files:
             dev_image = request.files['dev_image']
@@ -180,6 +192,7 @@ def edit_dev(dev_id):
             "dev_image": dev_image.filename if dev_image is not None else "",
             "looking_for_work": looking_for_work,
             "contact_email": request.form.get("contact_email"),
+            "contact_portfolio": request.form.get("contact_portfolio"),
             "skills": request.form.getlist("skills"),
             "created_by": session["user"],
             "img_id": result
@@ -190,6 +203,7 @@ def edit_dev(dev_id):
     dev = mongo.db.developers.find_one({"_id": ObjectId(dev_id)})
     skills = mongo.db.skills.find().sort("skill_name", 1)
     return render_template("edit_dev.html", dev=dev, skills=skills)
+
 
 @app.route("/delete_dev/<dev_id>")
 def delete_dev(dev_id):
@@ -206,6 +220,11 @@ def get_skills():
 
 @app.route("/add_skill", methods=["GET", "POST"])
 def add_skill():
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
+
     if request.method == "POST":
         skill = {
             "skill_name": request.form.get("skill_name")
@@ -218,6 +237,11 @@ def add_skill():
 
 @app.route("/edit_skill/<skill_id>", methods=["GET", "POST"])
 def edit_skill(skill_id):
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
+
     if request.method == "POST":
         submit = {
             "skill_name": request.form.get("skill_name")
@@ -232,6 +256,11 @@ def edit_skill(skill_id):
 
 @app.route("/delete_skill/<skill_id>")
 def delete_skill(skill_id):
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
+
     mongo.db.skills.remove({"_id": ObjectId(skill_id)})
     flash("Skill successfully deleted!")
     return redirect(url_for("admin"))
@@ -239,6 +268,10 @@ def delete_skill(skill_id):
 
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
 def edit_user(user_id):
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
 
     is_admin = True if request.form.get("is_admin") else False
 
@@ -257,6 +290,11 @@ def edit_user(user_id):
 
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
+
+    if 'user' not in session:
+        flash('You must log in or register first!')
+        return redirect(url_for('login'))
+
     mongo.db.users.remove({"_id": ObjectId(user_id)})
     flash("User successfully deleted!")
     return redirect(url_for("admin"))

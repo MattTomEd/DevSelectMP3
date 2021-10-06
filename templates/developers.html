@@ -30,6 +30,12 @@
             {{ developer.first_name }} {{ developer.last_name }}
         </div>
         <div class="collapsible-body">
+            {% if developer.dev_image %}
+            <img class="developer-img" src="{{url_for('img_uploads', filename=developer['dev_image'])}}" alt="developer image" />
+            {% else %}
+            <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
+            {% endif %}
+            <br>
             {{ developer.contact_portfolio }}
             <br>
             {{ developer.description }}
