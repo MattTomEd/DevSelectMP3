@@ -20,6 +20,10 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 @app.route("/")
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
 @app.route("/get_devs")
 def get_devs():
     developers = list(mongo.db.developers.find())
@@ -60,6 +64,11 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if 'user' in session:
+        flash("You are already logged in!")
+        return redirect(url_for('get_devs'))
+
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -89,6 +98,9 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    if 'user' not in session:
+        flash("You need to log in to see your profile!")
+        return redirect(url_for('login'))
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -130,6 +142,7 @@ def add_dev():
             "description": request.form.get("description"),
             "dev_image": dev_image.filename if dev_image is not None else "",
             "looking_for_work": looking_for_work,
+            "contact_email": request.form.get("contact_email"),
             "skills": request.form.getlist("skills"),
             "created_by": session["user"],
             "img_id": result
@@ -153,13 +166,23 @@ def edit_dev(dev_id):
     
     if request.method == "POST":
         looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+
+        if "dev_image" in request.files:
+            dev_image = request.files['dev_image']
+            if dev_image.filename != '':
+                dev_image.filename = str(uuid.uuid4())
+            result = mongo.save_file(dev_image.filename, dev_image)
+
         devsubmit = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
             "description": request.form.get("description"),
+            "dev_image": dev_image.filename if dev_image is not None else "",
             "looking_for_work": looking_for_work,
+            "contact_email": request.form.get("contact_email"),
             "skills": request.form.getlist("skills"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "img_id": result
         }
         mongo.db.developers.update({"_id": ObjectId(dev_id)}, devsubmit)
         flash("Developer successfully updated!")
