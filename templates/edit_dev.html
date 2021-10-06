@@ -4,13 +4,15 @@
 <h3>Edit Developer</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('edit_dev', dev_id=dev._id) }}" enctype="multipart/form-data">
+    <form class="col s12" method="POST" action="{{ url_for('edit_dev', dev_id=dev._id) }}"
+        enctype="multipart/form-data">
         <div class="row">
             <div class="col s1">
                 <i class="fas fa-user-circle"></i>
             </div>
             <div class="input-field col s11">
-                <input id="first_name" name="first_name" type="text" maxlength="20" value="{{ dev.first_name }}" class="validate" required>
+                <input id="first_name" name="first_name" type="text" maxlength="20" value="{{ dev.first_name }}"
+                    class="validate" required>
                 <label for="first_name">First Name</label>
             </div>
         </div>
@@ -19,7 +21,8 @@
                 <i class="fas fa-user-circle"></i>
             </div>
             <div class="input-field col s11">
-                <input id="last_name" name="last_name" type="text" maxlength="20" value="{{ dev.last_name }}" class="validate" required>
+                <input id="last_name" name="last_name" type="text" maxlength="20" value="{{ dev.last_name }}"
+                    class="validate" required>
                 <label for="last_name">Last Name</label>
             </div>
         </div>
@@ -28,7 +31,8 @@
                 <i class="fas fa-envelope-square"></i>
             </div>
             <div class="input-field col s11">
-                <input id="contact_email" name="contact_email" type="email" maxlength="40" value="{{ dev.contact_email }}" class="validate" required>
+                <input id="contact_email" name="contact_email" type="email" maxlength="40"
+                    value="{{ dev.contact_email }}" class="validate" required>
                 <label for="contact_email">Enter your email</label>
             </div>
         </div>
@@ -37,8 +41,8 @@
                 <i class="fas fa-website"></i>
             </div>
             <div class="input-field col s11">
-                <input id="contact_portfolio" name="contact_portfolio" type="text" maxlength="40" value="{{ dev.contact_portfolio }}" class="validate"
-                    required>
+                <input id="contact_portfolio" name="contact_portfolio" type="text" maxlength="40"
+                    value="{{ dev.contact_portfolio }}" class="validate" required>
                 <label for="contact_portfolio">Enter your portfolio website</label>
             </div>
         </div>
@@ -82,7 +86,8 @@
                 {% endfor %}
             </div>
             <div class="input-field col s8">
-                <textarea id="description" name="description" class="materialize-textarea">{{- dev.description -}}</textarea>
+                <textarea id="description" name="description"
+                    class="materialize-textarea">{{- dev.description -}}</textarea>
                 <label for="description">Enter a summary of your recent work</label>
             </div>
         </div>

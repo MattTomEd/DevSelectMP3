@@ -31,7 +31,8 @@
         </div>
         <div class="collapsible-body">
             {% if developer.dev_image %}
-            <img class="developer-img" src="{{url_for('img_uploads', filename=developer['dev_image'])}}" alt="developer image" />
+            <img class="developer-img" src="{{url_for('img_uploads', filename=developer['dev_image'])}}"
+                alt="developer image" />
             {% else %}
             <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
             {% endif %}
@@ -50,12 +51,12 @@
             {% if developer.looking_for_work|lower == "on" %}
             <br>
             <p class="green-text text-darken-4">This person is currently looking for work!</strong>
-            {% else %}
-            <br>
-            <p class="red-text text-darken-4">This person is not looking for work.</strong>
-            {% endif %}
-            <br>
-            <p><strong>Added by {{ developer.created_by }}</strong></p>
+                {% else %}
+                <br>
+                <p class="red-text text-darken-4">This person is not looking for work.</strong>
+                    {% endif %}
+                    <br>
+                    <p><strong>Added by {{ developer.created_by }}</strong></p>
         </div>
     </li>
     {% endfor %}

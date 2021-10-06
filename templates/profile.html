@@ -5,7 +5,7 @@
     <div class="col s8 offset-s2">
         <div class="row">
             <h3>
-               Developer entry profile: {{ username }}
+                Developer entry profile: {{ username }}
             </h3>
         </div>
     </div>
@@ -21,7 +21,8 @@
         </div>
         <div class="collapsible-body">
             {% if userdev.dev_image %}
-            <img class="developer-img" src="{{url_for('img_uploads', filename=userdev['dev_image'])}}" alt="developer image" />
+            <img class="developer-img" src="{{url_for('img_uploads', filename=userdev['dev_image'])}}"
+                alt="developer image" />
             {% else %}
             <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
             {% endif %}
@@ -40,17 +41,17 @@
             {% if userdev.looking_for_work|lower == "on" %}
             <br>
             <p class="green-text text-darken-4">This person is currently looking for work!</strong>
-            {% else %}
-            <br>
-            <p class="red-text text-darken-4">This person is not looking for work.</strong>
-            {% endif %}
-            <br>
-            <p><strong>Added by {{ userdev.created_by }}</strong></p>
-            <div class="col s3">
-                <a href="{{ url_for('delete_dev', dev_id=userdev._id)}}"
-                    class="btn-small red align-right">Delete</a>
-                <a href="{{ url_for('edit_dev', dev_id=userdev._id)}}" class="btn-small align-right">Edit</a>
-            </div>
+                {% else %}
+                <br>
+                <p class="red-text text-darken-4">This person is not looking for work.</strong>
+                    {% endif %}
+                    <br>
+                    <p><strong>Added by {{ userdev.created_by }}</strong></p>
+                    <div class="col s3">
+                        <a href="{{ url_for('delete_dev', dev_id=userdev._id)}}"
+                            class="btn-small red align-right">Delete</a>
+                        <a href="{{ url_for('edit_dev', dev_id=userdev._id)}}" class="btn-small align-right">Edit</a>
+                    </div>
         </div>
     </li>
     {% endfor %}
@@ -59,8 +60,8 @@
 <div class="row section">
     <div class="s12 center-align">
         <h3>No developers found! Would you like to create one?</h3>
-        <a class="waves-effect waves-light green darken-3 btn-large center-align"
-            href="{{ url_for('add_dev') }}">Add your own developer</a>
+        <a class="waves-effect waves-light green darken-3 btn-large center-align" href="{{ url_for('add_dev') }}">Add
+            your own developer</a>
     </div>
 </div>
 {% endif %}

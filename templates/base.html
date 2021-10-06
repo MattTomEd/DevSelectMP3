@@ -20,22 +20,23 @@
     <header>
         <nav class="nav-extended green darken-4">
             <div class="nav-wrapper">
-                <a href="{{ url_for('home') }}" class="brand-logo"><img class="logo-img" src="{{url_for('static', filename='images/gamedevselectlogo.png')}}" alt="Logo Image"></a>
+                <a href="{{ url_for('home') }}" class="brand-logo"><img class="logo-img"
+                        src="{{url_for('static', filename='images/gamedevselectlogo.png')}}" alt="Logo Image"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                {% if session["is_admin"] == True %}
+                    {% if session["is_admin"] == True %}
                     <li class="green lighten-2 z-depth-2"><a href="{{ url_for('admin') }}">ADMIN</a></li>
-                {% endif %}
+                    {% endif %}
                     <li><a href="{{ url_for('home') }}">Home</a></li>
-                {% if session.user %}
+                    {% if session.user %}
                     <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                     <li><a href="{{ url_for('add_dev') }}">Add A Dev</a></li>
                     <li><a href="{{ url_for('get_devs') }}">Developers</a></li>
                     <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                {% else %}
+                    {% else %}
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
                     <li><a href="{{ url_for('register') }}">Register</a></li>
-                {% endif %}
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -49,27 +50,27 @@
             {% endif %}
             <li><a href="{{ url_for('get_devs') }}">Home</a></li>
             {% if session.user %}
-                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="{{ url_for('add_dev') }}">Add A Dev</a></li>
-                <li><a href="{{ url_for('get_devs') }}">Developers</a></li>
-                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <li><a href="{{ url_for('add_dev') }}">Add A Dev</a></li>
+            <li><a href="{{ url_for('get_devs') }}">Developers</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
-                <li><a href="{{ url_for('login') }}">Log In</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Log In</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
         </ul>
 
     </header>
-    
+
     <section>
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="row flashes">
-                        <h4 class="lighten-4 center-align">{{ message }}</h4>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="row flashes">
+            <h4 class="lighten-4 center-align">{{ message }}</h4>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
     </section>
 
@@ -88,24 +89,30 @@
 
 <footer class="page-footer green darken-4">
     <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-            <a href="{{ url_for('home') }}" class="brand-logo"><img class="logo-img" src="{{url_for('static', filename='images/gamedevselectlogo.png')}}" alt="Logo Image"></a>
-          <p class="grey-text text-lighten-4">Spend less time searching for your team and more time making games.</p>
+        <div class="row">
+            <div class="col l6 s12">
+                <a href="{{ url_for('home') }}" class="brand-logo"><img class="logo-img"
+                        src="{{url_for('static', filename='images/gamedevselectlogo.png')}}" alt="Logo Image"></a>
+                <p class="grey-text text-lighten-4">Spend less time searching for your team and more time making games.
+                </p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Find us on social media</h5>
+                <ul class="social-media">
+                    <li><a class="white-text text-lighten-3" href="https://www.facebook.com" target=”_blank”><i
+                                class="fab fa-facebook"></i></a></li>
+                    <li><a class="white-text text-lighten-3" href="https://www.twitter.com" target=”_blank”><i
+                                class="fab fa-twitter"></i></a></li>
+                    <li><a class="white-text text-lighten-3" href="https://www.instagram.com" target=”_blank”><i
+                                class="fab fa-instagram"></i></a></li>
+                    <li><a class="white-text text-lighten-3" href="https://www.reddit.com" target=”_blank”><i
+                                class="fab fa-reddit"></i></a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Find us on social media</h5>
-          <ul class="social-media">
-            <li><a class="white-text text-lighten-3" href="https://www.facebook.com" target=”_blank”><i class="fab fa-facebook"></i></a></li>
-            <li><a class="white-text text-lighten-3" href="https://www.twitter.com" target=”_blank”><i class="fab fa-twitter"></i></a></li>
-            <li><a class="white-text text-lighten-3" href="https://www.instagram.com" target=”_blank”><i class="fab fa-instagram"></i></a></li>
-            <li><a class="white-text text-lighten-3" href="https://www.reddit.com" target=”_blank”><i class="fab fa-reddit"></i></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
     <div class="footer-copyright">
     </div>
-  </footer>
+</footer>
 
 </html>
