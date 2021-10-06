@@ -30,6 +30,12 @@ body {
     overflow: hidden;
 }
 
+.social-media li {
+    display: inline;
+    padding: 5px;
+    margin: 5px;
+}
+
 .card {
     background-color:rgb(13, 61, 13)
 }

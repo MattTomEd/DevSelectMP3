@@ -27,7 +27,7 @@
     {% for developer in developers %}
     <li>
         <div class="collapsible-header"><i class="fas fa-caret-down"></i>
-            {{ developer.first_name }} {{ developer.last_name }}
+            <strong>{{ developer.first_name }} {{ developer.last_name }}</strong>
         </div>
         <div class="collapsible-body">
             {% if developer.dev_image %}

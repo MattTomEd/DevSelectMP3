@@ -11,13 +11,21 @@
     </div>
 </div>
 
+{% if userdevs|length > 0 %}
+
 <ul class="collapsible">
     {% for userdev in userdevs %}
     <li>
         <div class="collapsible-header"><i class="fas fa-caret-down"></i>
-            {{ userdev.first_name }} {{ userdev.last_name }}
+            <strong>{{ userdev.first_name }} {{ userdev.last_name }}</strong>
         </div>
         <div class="collapsible-body">
+            {% if userdev.dev_image %}
+            <img class="developer-img" src="{{url_for('img_uploads', filename=userdev['dev_image'])}}" alt="developer image" />
+            {% else %}
+            <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
+            {% endif %}
+            <br>
             {{ userdev.contact_portfolio }}
             <br>
             {{ userdev.description }}
@@ -37,15 +45,24 @@
             {% endif %}
             <br>
             <p><strong>Added by {{ userdev.created_by }}</strong></p>
-            <br>
             <div class="col s3">
-                <a href="{{ url_for('delete_dev', dev_id=userdev._id)}}" class="btn-small red align-right">Delete</a>
+                <a href="{{ url_for('delete_dev', dev_id=userdev._id)}}"
+                    class="btn-small red align-right">Delete</a>
                 <a href="{{ url_for('edit_dev', dev_id=userdev._id)}}" class="btn-small align-right">Edit</a>
             </div>
         </div>
     </li>
     {% endfor %}
 </ul>
+{% else %}
+<div class="row section">
+    <div class="s12 center-align">
+        <h3>No developers found! Would you like to create one?</h3>
+        <a class="waves-effect waves-light green darken-3 btn-large center-align"
+            href="{{ url_for('add_dev') }}">Add your own developer</a>
+    </div>
+</div>
+{% endif %}
 
 <div class="row">
     <div class="col s12">
