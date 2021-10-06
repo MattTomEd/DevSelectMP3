@@ -29,7 +29,7 @@ def home():
 @app.route("/get_devs")
 def get_devs():
     if 'user' not in session:
-        flash("You need to log in to see your profile!")
+        flash("You need to log in to see the developer list!")
         return redirect(url_for('login'))
     developers = list(mongo.db.developers.find())
     return render_template("developers.html", developers=developers)
