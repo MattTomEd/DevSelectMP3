@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Edit User</h3>
+
+<div class="row">
+    <form class="col s12" method="POST" action="{{ url_for('edit_user', user_id=user._id) }}">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="username" name="username" type="text" value="{{ user.username }}" minlength="2"
+                    maxlength="20" class="validate" required>
+                <label for="username">Username</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-user-circle"></i>
+                <input id="email" name="email" type="email" value="{{ user.email }}" minlength="2"
+                    maxlength="50" class="validate" required>
+                <label for="email">email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="input-field col s12 center-align">
+                <div class="switch">
+                    <p>Is this user an admin?</p>
+                    <label for="is_admin">
+                        No
+                        <input type="checkbox" id="is_admin" name="is_admin">
+                        <span class="lever"></span>
+                        Yes
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a href="{{ url_for('admin') }}" class="btn red waves-effect waves-light">Cancel
+                    <i class="material-icons right"></i>
+                </a>
+                <button class="btn waves-effect waves-light" type="submit">Edit User
+                    <i class="material-icons right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

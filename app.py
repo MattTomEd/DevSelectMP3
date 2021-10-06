@@ -79,7 +79,7 @@ def login():
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
-                    session["is_admin"] = True if existing_user['is_admin'] == "True" else False
+                    session["is_admin"] = True if existing_user['is_admin'] == True else False
                     flash("Welcome, {}".format(request.form.get("username")))
                     return redirect(url_for(
                         "profile", username=session["user"]))
@@ -223,7 +223,7 @@ def edit_skill(skill_id):
             "skill_name": request.form.get("skill_name")
         }
         mongo.db.skills.update({"_id": ObjectId(skill_id)}, submit)
-        flash("Skill updated successfully")
+        flash("Skill updated successfully!")
         return redirect(url_for("get_skills"))
     skill = mongo.db.skills.find_one({"_id": ObjectId(skill_id)})
     return render_template("edit_skill.html", skill=skill)
@@ -234,7 +234,32 @@ def edit_skill(skill_id):
 def delete_skill(skill_id):
     mongo.db.skills.remove({"_id": ObjectId(skill_id)})
     flash("Skill successfully deleted!")
-    return redirect(url_for("get_skills"))
+    return redirect(url_for("admin"))
+
+
+@app.route("/edit_user/<user_id>", methods=["GET", "POST"])
+def edit_user(user_id):
+
+    is_admin = True if request.form.get("is_admin") else False
+
+    if request.method == "POST":
+        submit = {
+            "username": request.form.get("username"),
+            "email": request.form.get("email"),
+            "is_admin": is_admin
+        }
+        mongo.db.users.update({"_id": ObjectId(user_id)}, submit)
+        flash("User updated successfully")
+        return redirect(url_for("admin"))
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    return render_template("edit_user.html", user=user)
+
+
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+    mongo.db.users.remove({"_id": ObjectId(user_id)})
+    flash("User successfully deleted!")
+    return redirect(url_for("admin"))
 
 
 @app.route("/admin")
