@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Developer List</h2>
+<h2>Search for a developer</h2>
 
 <div class="row card-panel grey lighten-5">
     <form action="{{ url_for('search') }}" method="post" class="col s12">
@@ -36,8 +36,6 @@
             <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
             {% endif %}
             <br>
-            {{ developer.contact_portfolio }}
-            <br>
             {{ developer.description }}
             <br>
             <br>
@@ -46,6 +44,9 @@
             {% endfor %}
             <br>
             {{ developer.contact_email }}
+            <br>
+            {{ developer.contact_portfolio }}
+            <br>
             {% if developer.looking_for_work|lower == "on" %}
             <br>
             <p class="green-text text-darken-4">This person is currently looking for work!</strong>

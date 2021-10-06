@@ -26,8 +26,6 @@
             <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
             {% endif %}
             <br>
-            {{ userdev.contact_portfolio }}
-            <br>
             {{ userdev.description }}
             <br>
             <br>
@@ -36,6 +34,9 @@
             {% endfor %}
             <br>
             {{ userdev.contact_email }}
+            <br>
+            {{ userdev.contact_portfolio }}
+            <br>
             {% if userdev.looking_for_work|lower == "on" %}
             <br>
             <p class="green-text text-darken-4">This person is currently looking for work!</strong>

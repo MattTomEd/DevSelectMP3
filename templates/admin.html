@@ -33,14 +33,21 @@
 
 <h3>Developer Panel</h3>
 
+{% if developers|length > 0 %}
+
 <ul class="collapsible">
     {% for developer in developers %}
     <li>
         <div class="collapsible-header"><i class="fas fa-caret-down"></i>
-            {{ developer.first_name }} {{ developer.last_name }}
+            <strong>{{ developer.first_name }} {{ developer.last_name }}</strong>
         </div>
         <div class="collapsible-body">
-            {{ developer.contact_portfolio }}
+            {% if developer.dev_image %}
+            <img class="developer-img" src="{{url_for('img_uploads', filename=developer['dev_image'])}}"
+                alt="developer image" />
+            {% else %}
+            <strong class="red-text text-darken-2 text-shadow">No image found!</strong>
+            {% endif %}
             <br>
             {{ developer.description }}
             <br>
@@ -50,6 +57,9 @@
             {% endfor %}
             <br>
             {{ developer.contact_email }}
+            <br>
+            {{ developer.contact_portfolio }}
+            <br>
             {% if developer.looking_for_work|lower == "on" %}
             <br>
             <p class="green-text text-darken-4">This person is currently looking for work!</strong>
@@ -59,7 +69,6 @@
                     {% endif %}
                     <br>
                     <p><strong>Added by {{ developer.created_by }}</strong></p>
-                    <br>
                     <div class="col s3">
                         <a href="{{ url_for('delete_dev', dev_id=developer._id)}}"
                             class="btn-small red align-right">Delete</a>
@@ -69,32 +78,8 @@
     </li>
     {% endfor %}
 </ul>
-
-<h3>Skills Panel</h3>
-
-<div class="row">
-    <div class="col s12 center-align">
-        <a href="{{ url_for('add_skill') }}" class="btn-large">
-            Add Skill
-        </a>
-    </div>
-</div>
-<div class="row">
-    {% for skill in skills %}
-    <div class="col s12 m3">
-        <div class="card green darken-4 center-align">
-            <div class="card-content white-text">
-                <span class="card-title"> {{ skill.skill_name }}</span>
-            </div>
-            <div class="card-action no-margin">
-                <a class="blue-text text-lighten-3 center-align no-margin"
-                    href="{{ url_for('edit_skill', skill_id=skill._id) }}">Edit</a>
-                <a class="red-text text-lighten-3 center-align no-margin"
-                    href="{{ url_for('delete_skill', skill_id=skill._id) }}">Delete</a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+{% else %}
+<h3>No developers found!</h3>
+{% endif %}
 
 {% endblock %}
