@@ -12,6 +12,10 @@
             Username: {{ user.username }}
             <br>
             Email: {{ user.email }}
+            <br>
+            {% if user.is_admin == True %}
+            <i class="fas fa-users-cog"></i><strong>Admin account</strong>
+            {% endif %}
         </div>
         <div class="collapsible-body">
             <div class="col s3">
