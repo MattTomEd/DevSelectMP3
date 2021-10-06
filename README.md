@@ -89,11 +89,13 @@ MongoDB provides the functionality behind this database. The structure is as fol
 
 ## Wireframes
 
--   Starting state - [View](docs/wireframes/wireframe1.png)
+-   Starting state - [View](documentation/wireframes/wireframe1.png)
 
--   Table of data received from API - [View](docs/wireframes/wireframe2.png)
+-   Profile page concept - a list of developers the user has created - [View](documentation/wireframes/wireframe2.png)
 
--   Recipe summary - [View](docs/wireframes/wireframe3.png)
+-   Individual entry page - originally to be conceived as a separate page entry, but this had to be managed - [View](documentation/wireframes/wireframe3.png)
+
+-   Account creation concept - [View](documentation/wireframes/wireframe4.png)
 
 ##  Site structure
 
@@ -175,11 +177,10 @@ Font Awesome icons have been utilised in this project to provide more style to t
 
 The W3C Markup Validator, W3C CSS Validator and JS Hint services were used to validate every page of the project to ensure there were no syntax errors in the project.
 
--   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/) - All pages pass with no errors.
+-   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/) - All pages pass with no errors Flask markup causes errors otherwise, but this is to be expected.
 -   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - CSS file passes with no errors.
--   [JS Hint](https://jshint.com/) - JS file passes with no errors Some variables are used by HTML onclick attributes which are not recognised in this check.
-
-
+-   [JS Hint](https://jshint.com/) - JS file passes with no errors.
+-   [PEP8](http://pep8online.com/) - app.py passes with no errors.
 
 
 ### Responsiveness

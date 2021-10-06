@@ -84,8 +84,9 @@ def login():
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                session["is_admin"] = True if
-                existing_user['is_admin'] is True else False
+                session[
+                    "is_admin"
+                    ] = True if existing_user['is_admin'] is True else False
                 flash("Welcome, {}".format(request.form.get("username")))
                 return redirect(url_for(
                     "profile", username=session["user"]
