@@ -14,6 +14,14 @@ body {
     margin: 0 0;
 }
 
+label {
+    color: black;
+}
+
+.input-field>label {
+    color: black;
+}
+
 .logo-img {
     max-width: 225px;
 }

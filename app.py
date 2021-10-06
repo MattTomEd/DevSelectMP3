@@ -1,7 +1,7 @@
 import os
 import uuid
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -19,13 +19,18 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("home.html")
 
+
 @app.route("/get_devs")
 def get_devs():
+    if 'user' not in session:
+        flash("You need to log in to see your profile!")
+        return redirect(url_for('login'))
     developers = list(mongo.db.developers.find())
     return render_template("developers.html", developers=developers)
 
@@ -77,12 +82,14 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    session["is_admin"] = True if existing_user['is_admin'] == True else False
-                    flash("Welcome, {}".format(request.form.get("username")))
-                    return redirect(url_for(
-                        "profile", username=session["user"]))
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                session["is_admin"] = True if
+                existing_user['is_admin'] is True else False
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for(
+                    "profile", username=session["user"]
+                    ))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -124,14 +131,13 @@ def logout():
 
 @app.route("/add_dev", methods=["GET", "POST"])
 def add_dev():
-    
     if 'user' not in session:
         flash('You must log in or register first!')
         return redirect(url_for('login'))
-    
     if request.method == "POST":
 
-        looking_for_work = "on" if request.form.get("looking_for_work") else "off"
+        looking_for_work = "on" if request.form.get(
+            "looking_for_work") else "off"
 
         dev_image = None
         result = None
@@ -168,23 +174,19 @@ def img_uploads(filename):
 
 @app.route("/edit_dev/<dev_id>", methods=["GET", "POST"])
 def edit_dev(dev_id):
-
     if 'user' not in session:
         flash('You must log in or register first!')
         return redirect(url_for('login'))
-    
     if request.method == "POST":
-        looking_for_work = "on" if request.form.get("looking_for_work") else "off"
-
+        looking_for_work = "on" if request.form.get(
+            "looking_for_work") else "off"
         dev_image = None
         result = None
-
         if "dev_image" in request.files:
             dev_image = request.files['dev_image']
             if dev_image.filename != '':
                 dev_image.filename = str(uuid.uuid4())
             result = mongo.save_file(dev_image.filename, dev_image)
-
         devsubmit = {
             "first_name": request.form.get("first_name"),
             "last_name": request.form.get("last_name"),
@@ -215,7 +217,7 @@ def delete_dev(dev_id):
 @app.route("/get_skills")
 def get_skills():
     skills = list(mongo.db.skills.find().sort("skill_name", 1))
-    return render_template("skills.html", skills = skills)
+    return render_template("skills.html", skills=skills)
 
 
 @app.route("/add_skill", methods=["GET", "POST"])
@@ -251,7 +253,6 @@ def edit_skill(skill_id):
         return redirect(url_for("get_skills"))
     skill = mongo.db.skills.find_one({"_id": ObjectId(skill_id)})
     return render_template("edit_skill.html", skill=skill)
-
 
 
 @app.route("/delete_skill/<skill_id>")
@@ -306,7 +307,7 @@ def admin():
     users = list(mongo.db.users.find())
     developers = list(mongo.db.developers.find())
     return render_template(
-        "admin.html", skills = skills, developers = developers, users = users
+        "admin.html", skills=skills, developers=developers, users=users
         )
 
 

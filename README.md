@@ -1,108 +1,256 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align="center">Milestone Project 3 - GameDev.Select</h1>
 
-Welcome Matthew Edwards,
+[View the live project here.](https://flask-dev-select-mp.herokuapp.com/)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+For the MS3 brief, I have designed a website that uses Flask and MongoDB to create a database of developers. These developers can leave their portfolio links, contact emails, a list of skills and a flag that they can be contacted for work. 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+This website also has an Admin panel for admin-flagged users to moderate users, skills and developer entries as necessary.
 
-## Gitpod Reminders
+![Responsiveness test](documentation/readme/responsive.png)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# User Experience (UX)
 
-`python3 -m http.server`
+# Strategy plane
 
-A blue button should appear to click: _Make Public_,
+## Aims of the website
 
-Another blue button should appear to click: _Open Browser_.
+The identified needs of the site have been measured as below: 
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+*   Provide users with a tool to search for developers by name or by skill
+*   Provide developers with a tool to team up with other people to fill skill gaps
+*   Allow administration users an easy-access page to moderate entries as appropriate
+*   Provide users with an account to manage their own entries, protected with an authenticated password-protected account
 
-A blue button should appear to click: _Make Public_,
+The core aims of the website 
 
-Another blue button should appear to click: _Open Browser_.
+## Competitor analysis
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+I wanted to provide an easy-to-access list of developers that can be easily viewable with one search, utilising as few clicks as possible. I also wanted to provide fields for developers to add details about current projects, as well as an image for their work or for themselves.
 
-To log into the Heroku toolbelt CLI:
+I wanted the admin user to have their own dedicated window to easily access all data to then delete or edit as appropriate.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+# Scope plane
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+*   A searchable database that users can access in a few clicks once signing up
+*   Dropdown fields that reveal more information about a developer, to avoid hogging too much space
+*   Design philosophy that is not elaborate and easy to read
+*   Use of session cookie and Flask functionality to allow a user to sign in and manage their data
+*   Image upload functionality for more customisation
 
-------
+# Structure plane
 
-## Release History
+This website has a base.html page that provides the skeleton structure of the site - namely its header and footer content. Other pages feed in to this structure, implementing logic where needed to display different information. For example, if a user has entered no developers, their profile page provides a message and a button to encourage them to submit one. 
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+If a user wishes to exit out of editing a field, they are able to do so. 
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+*   Consistency – Pages must look, feel and interact in a consistent way. This applies to dropdown fields for developers as well as selecting fields in a table
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+*   Predictability – The website must respond in a predictable manner - particularly important when users wish to submit their data for the website. Flash messages provide the user with updates based on their status. This includes if a user is trying to access a profile page while not logged in.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+*   Learnability – Features must be intuitive and feature single-click learning to prevent visitors becoming frustrating and clicking away
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+*   Visibility – Features must be visible, with content hinting included as appropriate
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+*   Feedback – Input fields and clickable events should respond in a way that assures the user that an event is progressing. Messages will flash at the top of the screen if an action is successful, or otherwise if data has not been entered correctly. Form fields also have data verification - for example, if a user inputs an email address incorrectly.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+## Database Structure
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+MongoDB provides the functionality behind this database. The structure is as follows:
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+**1.  developers**
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+    _id: A unique ID for this entry to ensure a record is correctly selected.
+    first_name:
+    last_name:
+    description:
+    contact_email:
+    contact_portfolio:
+    looking_for_work:
+    skills: [An array of skills will be listed here]
+    dev_image:
+    img_id: A unique ID for this image to ensure duplicate images will not be entered.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+**2.  skills**
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+    _id: A unique ID for this entry to ensure a record is correctly selected.
+    name: Name of the skill to be entered. Only one entry is needed here, as users will pick multiple entries to add to developers within an array.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+**3.  users**
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+    _id: A unique ID for this entry to ensure a record is correctly selected.
+    username:
+    email:
+    password: Using a hash, this password is secure for users to enter into the database to create their session.
+    is_admin: Cannot be entered by users. This status can only be changed by other admin users.
 
-------
 
-## FAQ about the uptime script
+# Skeleton plane
 
-**Why have you added this script?**
+## Wireframes
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+-   Starting state - [View](docs/wireframes/wireframe1.png)
 
-**How will this affect me?**
+-   Table of data received from API - [View](docs/wireframes/wireframe2.png)
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+-   Recipe summary - [View](docs/wireframes/wireframe3.png)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+##  Site structure
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+-   The document will provide new users with the Login, Register and Home pages. Users attempting to reach the Developer info by entering the URL required will be prompted to log-in, and will be redirected to the login page.
+-   Registering an account requires an email, a password and a username. Users will then be able to see their entries on their profile. The profile is the only place a user can edit or delete entries. This prevents other users from editing their work.
+-   When entering a developer, users are prompted for required information or information that does not meet data verification. An image is not mandatory, and if no image has been provided, there will be replacement text provided in the developer's entry.
+-   The checkboxes for skills within the developer entry form are created through a for loop running through the skills collection, and if the admin adds more skills to the selection over time, these will automatically be added. 
+-   Admin users have the ability to edit and delete users, developers and skills. Admin users cannot delete other admin users. In future version of this build, I plan to add 'moderator' status that will provide a moderator user the ability to not be able to delete administration users, but also not be able to change the admin status of a user.
 
-**So….?**
+    
+# Surface plane
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+## Colour Scheme
+I have chosen a green colour style, using dark green to differentiate the header and footer respectively. Entries are coloured white, with the text inside differentiated from the skill 'chips', a style originating from Materialize.
 
-**Can I opt out?**
+## Icons
+Font Awesome icons have been utilised in this project to provide more style to the page. 
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+# User stories
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+## First Time Visitor Goals
 
-**Anything more?**
+1. As a First Time Visitor, I want to search for developers to help me with my project.
+2. As a First Time Visitor, I want to be able to create an account to store my own skills, or that of my team. I want the ability to create, edit, read and delete my records.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+## Returning Visitor Goals
 
----
+1. As a Returning Visitor, I want to be able to search for records that I have created, or that others have created.
+2. As a Returning Visitor, I want to update records that are no longer relevant. I want all of my records in one easy to find place.
 
-Happy coding!
+## Features
+
+-   CRUD functionality for a user:
+
+    The ability to create records
+    The ability to read records
+    The ability to update previously created records
+    The ability to delete previously created records
+
+-   A search bar that searches through a user's name and skills
+
+-   Flashed messaged to provide feedback to the user
+
+
+## Technologies Used
+
+### Languages Used
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+-   [Python](https://en.wikipedia.org/wiki/Python)
+
+### Frameworks, Libraries & Programs Used
+
+1. [Materialize:](https://materializecss.com/)
+    - Bootstrap was used to assist with the responsiveness and styling of the website.
+2. [Font Awesome:](https://fontawesome.com/)
+    - Font Awesome has been used for icons used in parts of the site.
+3. [jQuery:](https://jquery.com/)
+    - jQuery has been used to enable certain Materialize content.
+4. [Git](https://git-scm.com/)
+    - Git has been used as a version control system, which enables viewers to see the deployment history and design process. Github has been used as a storage for this info.
+5. [GIMP:](https://www.gimp.org/)
+    - GIMP was used to resize images, export to .jpg and .png and recolour some images.
+6. [Jinja:](https://jinja.palletsprojects.com/en/2.10.x/)
+    - Jinja is the template language for Flask and enables data to be displayed from the python application.
+7. [PyMongo:](https://flask-pymongo.readthedocs.io/en/latest/)
+    - PyMongo enables the Python application to access the MongoDB database.
+8. [MongoDB:](https://www.mongodb.com/)
+    - Providing the framework for the database used in this project.
+9. [Flask:](https://flask.palletsprojects.com/en/2.0.x/)
+    - Flask is the web framework that runs the application.
+10. [Balsamiq:](https://balsamiq.com/)
+    - Balsamiq has been used for the wireframes attached to this project.
+
+
+## Testing
+
+The W3C Markup Validator, W3C CSS Validator and JS Hint services were used to validate every page of the project to ensure there were no syntax errors in the project.
+
+-   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/) - All pages pass with no errors.
+-   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - CSS file passes with no errors.
+-   [JS Hint](https://jshint.com/) - JS file passes with no errors Some variables are used by HTML onclick attributes which are not recognised in this check.
+
+
+
+
+### Responsiveness
+
+-   The website has been designed with a mobile-first approach, so all fields should be responsive and should provide ease of use on mobile or tablet devices. Materialize classes have been uses to ensure consistency in the app's scaling up to desktop screen size.
+-   The website has been tested on mobile, tablet and desktop devices.
+
+### Further Testing
+
+-   The website has been tested using Chrome Developer Tools to ensure any interactions operate correctly (through manually enabling selectors such as :hover or :active)
+-   The website has been tested by other people and feedback has been gathered and acted on.
+
+### Further features
+
+-  Future features will implement pagination, moderator users and further defensive programming for users to get confirmation prior to entering new info or deleting old info.
+
+
+## Deployment
+### GitHub Pages
+
+This website has been deployed using Heroku.
+
+To deploy a page yourself, do the following:
+
+1. Using your preferred IDE, create a Procfile and a requirements.txt for Heroku to know what is needed from the frameworks and libraries you have used. 
+1. Commit and push these settings to GitHub, if you are using GitHub.
+1. This will require the use of a secret key, an IP, aport, MONGO_DBNAME and MONGO_URI. Ensure this is saved in a file that will NOT be committed to GitHub, as this info is sensitive. This information can be input externally
+1. Log into Heroku to set up your account and applicaton, and then enter your environment variables.
+1. Heroku has an option to use GitHub as a deployment method. Enable this, and ensure you are using the master branch - this should be the only option at this stage. 
+1. You will be provided with a link to access the most recent commit of your website.
+
+
+### Forking the GitHub Repository
+To make a clone, or 'fork' this repository, follow the steps below.
+
+1.  Access your GitHub account and find the relevant repository. If you do not have a Github account, follow the steps to create one.
+1.  Access the repository you would like to fork. Click on 'Fork' on the top right of the page.
+1.  You will find a copy of the repository in your own Github account.
+
+### Making a Local Clone
+How to run this project locally:
+
+1.  Install the GitPod Browser Extension for Chrome.
+1.  After installation, restart the browser.
+1.  Access your GitHub account and find the relevant repository. If you do not have a Github account, follow the steps to create one.
+1.  Click the green "GitPod" button in the top right corner of the repository. 
+
+### How to run this project within a local IDE, such as VSCode:
+
+1.  Access your GitHub account and find the relevant repository. If you do not have a Github account, follow the steps to create one.
+1.  Under the repository name, click 'Clone'.
+1.  Copy the clone URL for the repository You can click the clipboard icon to do this, or copy directly.
+1.  Using an IDE, open a new terminal window.
+1.  Navigate to the directory location where you want the cloned directory to be made.
+1.  Type 'git clone', and then paste the URL you copied in Step 3, as shown in the next step:
+1. `git clone https://github.com/USERNAME/REPOSITORY  `
+1.  Press Enter. Your local clone will be created.
+
+### Content
+
+-   CodeInstitute's sample README was used as a guide on how to document a comprehensive design process, and I used this template to inform the layout of my own design journey.
+
+
+### Media
+
+-   Images are sourced by myself using Google's search engine to find Creative Commons licence images. 
+
+### Acknowledgements
+
+-   Guido Cecilio for useful and helpful feedback during mentoring sessions.
+
+-   Code Institute for the Slack channel and tutor support when encouring technical issues or sudden Gitpod updates.
+
+-   Slack Exchange for helpful tips on specific questions I had during the creation of this project.
